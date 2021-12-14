@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-dockerized-deployment
+  labels:
+    app: nodejs-dockerized
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-dockerized
+  template:
+    metadata:
+      labels:
+        app: nodejs-dockerized
+    spec:
+      containers:
+      - name: nodejs-dockerized
+        image: joebarbere/nodejs-dockerized
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
